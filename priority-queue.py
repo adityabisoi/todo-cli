@@ -1,0 +1,72 @@
+class MinHeap:
+    def __init__(self):
+        self.arr=[]
+        self.size=0
+
+    def getParentIndex(self,index):
+        return (index-1)//2
+    
+    def getLeftChildIndex(self,index):
+        return 2*index+1
+
+    def getRightChildIndex(self,index):
+        return 2*index+2
+
+    def getParentPriority(self,index):
+        return self.arr[self.getParentIndex(index)][0]
+    
+    def getLeftChildPriority(self,index):
+        return self.arr[self.getLeftChildIndex(index)][0]
+
+    def getRightChildPriority(self,index):
+        return self.arr[self.getRightChildIndex(index)][0]
+
+    def getPriority(self,index):
+        return self.arr[index][0]
+
+    def hasParent(self,index):
+        return self.getParentIndex(index)>=0
+    
+    def hasLeftChild(self,index):
+        return self.getLeftChildIndex(index)<self.size
+
+    def hasRightChild(self,index):
+        return self.getRightChildIndex(index)<self.size
+    
+    def swap(self,index1,index2):
+        self.arr[index1],self.arr[index2]=self.arr[index2],self.arr[index1]
+    
+    def getTask(self):
+        task=self.arr[0][1]
+        self.arr[0]=self.arr.pop()
+        self.size-=1
+        self.heapifyDown()
+        return task
+    
+    def heapifyDown(self):
+        i=0
+        while self.hasLeftChild(i):
+            minIndex=self.getLeftChildIndex(i)
+            if self.hasRightChild(i) and self.getRightChildPriority(i)<self.getLeftChildPriority(i):
+                minIndex=self.getRightChildIndex(i)
+            if self.getPriority(i)<self.getPriority(minIndex):
+                break
+            else:
+                self.swap(i, minIndex)
+            i=minIndex
+            
+    def addTask(self,priority,taskName):
+        self.arr.append((priority,taskName))
+        self.size+=1
+        self.heapifyUp(self.size)
+
+    def heapifyUp(self,index):
+        i=index
+        while self.hasParent(i):
+            parentIndex=self.getParentIndex(i)
+            if self.getParentPriority(i)>self.getPriority(i):
+                self.swap(i,parentIndex)
+            else:
+                break
+            i=parentIndex
+            

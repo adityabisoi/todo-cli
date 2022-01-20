@@ -1,4 +1,5 @@
 import argparse
+from test import func
 
 parser=argparse.ArgumentParser()
 
