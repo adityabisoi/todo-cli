@@ -58,10 +58,10 @@ class MinHeap:
     def addTask(self,priority,taskName):
         self.arr.append((priority,taskName))
         self.size+=1
-        self.heapifyUp(self.size)
+        self.heapifyUp()
 
-    def heapifyUp(self,index):
-        i=index
+    def heapifyUp(self):
+        i=self.size
         while self.hasParent(i):
             parentIndex=self.getParentIndex(i)
             if self.getParentPriority(i)>self.getPriority(i):
