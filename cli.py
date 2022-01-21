@@ -1,10 +1,14 @@
 import argparse
-from test import func
+from priorityQueue import addToHeap, removeFromHeap
 
 parser=argparse.ArgumentParser()
 
-parser.add_argument('name',type=str)
+parser.add_argument('t',type=str,help='Name of the task')
+parser.add_argument('--p',type=int,choices=[1,2,3],help='Priority Level')
 
 args=parser.parse_args()
 
-print(args.name)
+if args.t=='pop':
+    print(removeFromHeap())
+else:
+    addToHeap(args.t, args.p)

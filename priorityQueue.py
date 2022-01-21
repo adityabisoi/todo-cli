@@ -77,15 +77,10 @@ class MinHeap:
         
     def printHeap(self):        # For debugging
         print(self.arr)
-            
-def createHeap():
-    heap=MinHeap()
-    heap.addTask(2, 'Clean fishtank')
-    heap.addTask(3, 'Coffee break')
-    heap.addTask(2, 'Eat')
-    heap.addTask(3, 'Sleep')
-    heap.printHeap()
-    print(heap.getTask())
-    print(heap.getTask())
 
-createHeap()
+heap=MinHeap()          
+def addToHeap(task,priority):
+    heap.addTask(priority, task)
+
+def removeFromHeap():
+    return heap.getTask()
