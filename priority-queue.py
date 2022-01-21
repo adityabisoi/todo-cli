@@ -37,8 +37,13 @@ class MinHeap:
         self.arr[index1],self.arr[index2]=self.arr[index2],self.arr[index1]
     
     def getTask(self):
+        if not self.arr:
+            return 'No more tasks to do, enjoy the rest of your day;)'
         task=self.arr[0][1]
-        self.arr[0]=self.arr.pop()
+        if len(self.arr)==1:
+            self.arr.pop()
+        else:
+            self.arr[0]=self.arr.pop()
         self.size-=1
         self.heapifyDown()
         return task
@@ -61,7 +66,7 @@ class MinHeap:
         self.heapifyUp()
 
     def heapifyUp(self):
-        i=self.size
+        i=self.size-1
         while self.hasParent(i):
             parentIndex=self.getParentIndex(i)
             if self.getParentPriority(i)>self.getPriority(i):
@@ -69,4 +74,18 @@ class MinHeap:
             else:
                 break
             i=parentIndex
+        
+    def printHeap(self):        # For debugging
+        print(self.arr)
             
+def createHeap():
+    heap=MinHeap()
+    heap.addTask(2, 'Clean fishtank')
+    heap.addTask(3, 'Coffee break')
+    heap.addTask(2, 'Eat')
+    heap.addTask(3, 'Sleep')
+    heap.printHeap()
+    print(heap.getTask())
+    print(heap.getTask())
+
+createHeap()
