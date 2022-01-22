@@ -1,9 +1,9 @@
 import pickle
 import os
 
-dir_path = os.path.dirname(os.path.realpath(__file__))
+base_dir = os.path.dirname(os.path.realpath(__file__))
 filename = 'storage.pk'
-storage_path=dir_path+'/'+filename
+storage_path=os.path.join(base_dir,filename)
 
 class MinHeap:
     def __init__(self,arr):
