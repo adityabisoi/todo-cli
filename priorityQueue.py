@@ -90,6 +90,8 @@ def addToHeap(task,priority):
     except Exception:
             arr=[]
     heap=MinHeap(arr)
+    if not priority:
+        priority=1
     heap.addTask(priority, task)
     arr=heap.returnHeap()
     with open(filename,'wb') as fi:
