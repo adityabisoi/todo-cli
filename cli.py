@@ -8,7 +8,7 @@ parser.add_argument('--p',type=int,choices=[1,2,3],help='Priority Level')
 
 args=parser.parse_args()
 
-if args.t=='pop':
+if args.task=='pop':
     print(removeFromHeap())
 else:
-    addToHeap(args.t, args.p)
+    addToHeap(args.task, args.p)

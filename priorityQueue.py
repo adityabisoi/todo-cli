@@ -1,6 +1,9 @@
 import pickle
+import os
 
+dir_path = os.path.dirname(os.path.realpath(__file__))
 filename = 'storage.pk'
+storage_path=dir_path+'/'+filename
 
 class MinHeap:
     def __init__(self,arr):
@@ -85,7 +88,7 @@ class MinHeap:
 
 def addToHeap(task,priority):
     try:
-        with open(filename, 'rb') as fi:
+        with open(storage_path, 'rb') as fi:
             arr=pickle.load(fi)
     except Exception:
             arr=[]
@@ -94,18 +97,18 @@ def addToHeap(task,priority):
         priority=1
     heap.addTask(priority, task)
     arr=heap.returnHeap()
-    with open(filename,'wb') as fi:
+    with open(storage_path,'wb') as fi:
         pickle.dump(arr, fi)
 
 def removeFromHeap():
     try:
-        with open(filename, 'rb') as fi:
+        with open(storage_path, 'rb') as fi:
             arr=pickle.load(fi)
     except Exception:
             return 'No more tasks to do, enjoy the rest of your day;)'
     heap=MinHeap(arr)
     task = heap.getTask()
     arr=heap.returnHeap()
-    with open(filename,'wb') as fi:
+    with open(storage_path,'wb') as fi:
         pickle.dump(arr, fi)
     return task
