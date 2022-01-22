@@ -1,7 +1,11 @@
+import pickle
+
+filename = 'storage.pk'
+
 class MinHeap:
-    def __init__(self):
-        self.arr=[]
-        self.size=0
+    def __init__(self,arr):
+        self.arr=arr
+        self.size=len(arr)
 
     def getParentIndex(self,index):
         return (index-1)//2
@@ -74,13 +78,32 @@ class MinHeap:
             else:
                 break
             i=parentIndex
-        
-    def printHeap(self):        # For debugging
-        print(self.arr)
 
-heap=MinHeap()          
+    def returnHeap(self):
+        return self.arr
+
+
 def addToHeap(task,priority):
+    try:
+        with open(filename, 'rb') as fi:
+            arr=pickle.load(fi)
+    except Exception:
+            arr=[]
+    heap=MinHeap(arr)
     heap.addTask(priority, task)
+    arr=heap.returnHeap()
+    with open(filename,'wb') as fi:
+        pickle.dump(arr, fi)
 
 def removeFromHeap():
-    return heap.getTask()
+    try:
+        with open(filename, 'rb') as fi:
+            arr=pickle.load(fi)
+    except Exception:
+            return 'No more tasks to do, enjoy the rest of your day;)'
+    heap=MinHeap(arr)
+    task = heap.getTask()
+    arr=heap.returnHeap()
+    with open(filename,'wb') as fi:
+        pickle.dump(arr, fi)
+    return task
