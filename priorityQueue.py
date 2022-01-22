@@ -94,7 +94,7 @@ def addToHeap(task,priority):
             arr=[]
     heap=MinHeap(arr)
     if not priority:
-        priority=1
+        priority=2
     heap.addTask(priority, task)
     arr=heap.returnHeap()
     with open(storage_path,'wb') as fi:
